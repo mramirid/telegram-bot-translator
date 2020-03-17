@@ -8,7 +8,7 @@ use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Attachments\Video;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
-require "vendor\autoload.php";
+require "vendor/autoload.php";
 
 $configs = [
     "telegram" => [
