@@ -1,15 +1,30 @@
 <?php
 
-$token = file_get_contents('TOKEN.txt');
+require_once "bot_helper.php";
 
-$updates = json_decode(file_get_contents("https://api.telegram.org/bot$token/getUpdates"), TRUE);
+$token  = file_get_contents('TOKEN.txt');
+$url    = "https://api.telegram.org/bot$token";
 
-$message = $updates["result"][0]["message"];
-print_r($message["text"]); exit;
+$updates = json_decode(file_get_contents("$url/getUpdates"), TRUE);
+
+// Get the last message
+$message = end($updates["result"])["message"];
 
 // Buat beberapa variabel untuk identifikasi chatid dan text yang akan dikirim
 $chatId = $message["chat"]["id"];
 $text = $message["text"];
+
+switch ($text) {
+    case 'btc_markets':
+        $response = getBtcMarkets();
+        break;
+    case 'idr_markets':
+        $response = getIdrMarkets();
+        break;
+    default:
+        $response = "Invalid command";
+        break;
+}
 
 // Buat Koneksi ke database
 // $server = "localhost"; //ganti sesuai server Anda
@@ -39,7 +54,8 @@ $text = $message["text"];
 
 // Request ke API
 
+echo $response;
 
-file_get_contents("$website/sendmessage?chat_id=$chatId&text=$balas");
+file_get_contents("$url/sendmessage?chat_id=$chatId&text=$response");
 
-//https://api.telegram.org/bot[masukkan api key]/setWebhook?url=https://[posisi file]
+// https://api.telegram.org/bot[masukkan api key]/setWebhook?url=https://[posisi file]
