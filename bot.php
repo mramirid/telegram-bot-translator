@@ -8,7 +8,10 @@ use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Attachments\Video;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
-require "vendor/autoload.php";
+require_once "vendor/autoload.php";
+require_once "constants/coins.php";
+require_once "constants/markets.php";
+require_once "core/Markets.php";
 
 $configs = [
     "telegram" => [
@@ -23,6 +26,18 @@ $botman = BotManFactory::create($configs);
 // Command
 $botman->hears("/start", function (BotMan $bot) {
     $bot->reply("Willkommen 😊");
+});
+
+$botman->hears("/idr_markets", function (BotMan $bot) {
+    global $IDR_MARKETS;
+    $idrMarkets = new Markets($IDR_MARKETS);
+    $bot->reply($idrMarkets->getResponses());
+});
+
+$botman->hears("/btc_markets", function (BotMan $bot) {
+    global $BTC_MARKETS;
+    $btcMarkets = new Markets($BTC_MARKETS);
+    $bot->reply($btcMarkets->getResponses());
 });
 
 // Message parameter
@@ -42,7 +57,7 @@ $botman->hears("request nilai ([0-9]+) di matkul (API|RPL)", function (BotMan $b
 });
 
 // Send image
-$botman->hears("kirim gambar", function (BotMan $bot) {
+$botman->hears("/berangkat_ke_upn", function (BotMan $bot) {
     $attachment = new Image("https://s.kaskus.id/r540x540/images/2014/03/23/6590730_20140323042249.png");
 
     $message = OutgoingMessage::create("Nenek moyang menggunakannya bermil-mil jauhnya")->withAttachment($attachment);
