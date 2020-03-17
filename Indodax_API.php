@@ -2,8 +2,10 @@
 
 require_once "bot_helper.php";
 
-$token  = file_get_contents('TOKEN.txt');
+$token  = file_get_contents('private/TOKEN.txt');
 $url    = "https://api.telegram.org/bot$token";
+
+file_get_contents("$url/setWebhook?url=https://indodax-bot.lab-it.xyz/Indodax_API.php");
 
 $updates = json_decode(file_get_contents("$url/getUpdates"), TRUE);
 
@@ -13,6 +15,8 @@ $message = end($updates["result"])["message"];
 // Buat beberapa variabel untuk identifikasi chatid dan text yang akan dikirim
 $chatId = $message["chat"]["id"];
 $text = $message["text"];
+
+$response = "HAHAHA";
 
 switch ($text) {
     case 'btc_markets':
@@ -53,8 +57,6 @@ switch ($text) {
 // }
 
 // Request ke API
-
-echo $response;
 
 file_get_contents("$url/sendmessage?chat_id=$chatId&text=$response");
 
