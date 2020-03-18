@@ -1,7 +1,7 @@
 # Indodax-API-BOT
 
 <p align="center">
-  <img src="https://piensa3d.com/wp-content/uploads/2017/10/telegram_logo_bot.jpg" height=300>
+  <img src="https://piensa3d.com/wp-content/uploads/2017/10/telegram_logo_bot.jpg" width="478" height="224">
 </p>
 
 ## Deskripsi
