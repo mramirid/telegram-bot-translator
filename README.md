@@ -1,7 +1,7 @@
 # Indodax-API-BOT
 
 <p align="center">
-  <img src="https://pasteboard.co/IZBj0JI.jpg" alt="Telegram & BotFather">
+  <img src="https://i.ibb.co/yYjbBHz/68747470733a2f2f7069656e736133642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f31302f74656c656772616d5f6c6f676f5f626f742e6a7067.jpg" alt="Telegram & BotFather">
 </p>
 
 ## Deskripsi
