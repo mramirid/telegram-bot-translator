@@ -6,7 +6,7 @@
 
 ## Deskripsi
 
-BOT Telegram untuk mengakses API Indodax, nama bot: [@indodax_api_bot](https://t.me/indodax_api_bot)
+BOT Telegram untuk mengakses API Indodax, bot: [@indodax_api_bot](https://t.me/indodax_api_bot)
 
 **NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'TOKEN.txt'
 
