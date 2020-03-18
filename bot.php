@@ -40,6 +40,10 @@ $botman->hears("/btc_markets", function (BotMan $bot) {
     $bot->reply($btcMarkets->getResponses());
 });
 
+$botman->hears("/btc_idr", function (BotMan $bot){
+    
+})
+
 // Message parameter
 $botman->hears("nama saya {nama}", function (BotMan $bot, $nama) {
     $bot->reply("Salam kenal $nama, saya temennya bot anjaymabar");
