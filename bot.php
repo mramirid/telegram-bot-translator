@@ -47,12 +47,19 @@ $botman->hears("{coin}", function (BotMan $bot, $coin){
     global $coin_btc_markets;
     $many = strlen($coin);
     $temp = substr($coin, 1, $many);
+
     if(in_array($temp, $coin_idr_markets)) {
         $coinIDR = new CoinIDR($temp);
         $bot->reply($coinIDR->getResponses());
     } else if(in_array($temp, $coin_btc_markets)) {
         $coinBTC = new CoinBTC($temp);
         $bot->reply($coinBTC->getResponses());
+    } else if ($coin === "/btc_markets"){
+
+    } else if ($coin === "/idr_markets"){
+
+    } else {
+        $bot->reply("Saya tidak kenal maksud anda");
     }
 });;
 
