@@ -12,6 +12,7 @@ require_once "vendor/autoload.php";
 require_once "constants/coins.php";
 require_once "constants/markets.php";
 require_once "core/CoinIDR.php";
+require_once "core/CoinBTC.php";
 require_once "core/Markets.php";
 
 $configs = [
@@ -41,21 +42,19 @@ $botman->hears("/btc_markets", function (BotMan $bot) {
     $bot->reply($btcMarkets->getResponses());
 });
 
-$botman->hears("/btc_idr", function (BotMan $bot){
+$botman->hears("{coin}", function (BotMan $bot, $coin){
     global $coin_idr_markets;
-    $coinIDR = new CoinIDR($coin_idr_markets[0]);
-    $bot->reply($coinIDR->getResponses());
+    global $coin_btc_markets;
+    $many = strlen($coin);
+    $temp = substr($coin, 1, $many);
+    if(in_array($temp, $coin_idr_markets)) {
+        $coinIDR = new CoinIDR($temp);
+        $bot->reply($coinIDR->getResponses());
+    } else if(in_array($temp, $coin_btc_markets)) {
+        $coinBTC = new CoinBTC($temp);
+        $bot->reply($coinBTC->getResponses());
+    }
 });;
-
-$botman->hears("/ten_idr", function (BotMan $bot){
-    global $coin_idr_markets;
-    $coinIDR = new CoinIDR($coin_idr_markets[1]);
-    $bot->reply($coinIDR->getResponses());
-});;
-
-$botman->hears("kuliah saya {kampus}", function (BotMan $bot, $kampus) {
-    $bot->reply("Oh kuliah di $kampus, saya temennya bot anjaymabar");
-});
 
 // Message parameter
 $botman->hears("nama saya {nama}", function (BotMan $bot, $nama) {

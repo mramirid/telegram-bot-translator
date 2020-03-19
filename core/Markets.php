@@ -55,7 +55,7 @@ class Markets
         } else {
             $responses .= "BTC Markets\n";
             foreach ($this->tickers as $key => $value) {
-                $responses .= strtoupper(explode('_', $key)[0]) . ' ' . $value['last'] . PHP_EOL;
+                $responses .= strtoupper(explode('_', $key)[0]) . ' ' . $value['last'] . " /$key" . PHP_EOL;
             }
         }
 
