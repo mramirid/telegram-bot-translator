@@ -14,7 +14,7 @@ BOT Telegram untuk mengakses API Indodax, bot: [@indodax_api_bot](https://t.me/i
 Link video turtorial bisa ditemukan [disini](https://www.youtube.com/watch?v=pTGRpH2dvRM)
 1. php -S localhost:[PORT]
 2. ngrok http [PORT] <br>(ngrok bisa didownload di [sini](https://ngrok.com/download))
-3. curl -d url=[GENERATED_LINK_HTTPS] -X POST ```https://api.telegram.org/bot[TOKEN]/setWebhook```
+3. curl -d url=[GENERATED_LINK_HTTPS]/file_bot.php -X POST ```https://api.telegram.org/bot[TOKEN]/setWebhook```
 
 ## Langkah-langkah jika sudah naruh di hosting
 1. Upload ke hosting
