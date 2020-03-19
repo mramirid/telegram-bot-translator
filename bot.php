@@ -47,6 +47,12 @@ $botman->hears("/btc_idr", function (BotMan $bot){
     $bot->reply($coinIDR->getResponses());
 });;
 
+$botman->hears("/ten_idr", function (BotMan $bot){
+    global $coin_idr_markets;
+    $coinIDR = new CoinIDR($coin_idr_markets[1]);
+    $bot->reply($coinIDR->getResponses());
+});;
+
 $botman->hears("kuliah saya {kampus}", function (BotMan $bot, $kampus) {
     $bot->reply("Oh kuliah di $kampus, saya temennya bot anjaymabar");
 });
