@@ -58,6 +58,8 @@ $botman->hears("{coin}", function (BotMan $bot, $coin){
 
     } else if ($coin === "/idr_markets"){
 
+    } else if ($coin === "/start"){
+
     } else {
         $bot->reply("Saya tidak kenal maksud anda");
     }
