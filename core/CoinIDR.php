@@ -31,8 +31,11 @@ class CoinIDR
          global $coin_idr_markets;
 
          if(in_array($this->coin, $coin_idr_markets)) {
-             $responses .= "Data Koin $this->coin\n";
-
+            $responses .= "Data Koin $this->coin\n";
+            $responses .= 'Harga Terakhir'. ' Rp.' . number_format($this->tickers[$this->coin]['last'], 0, ',', '.') . PHP_EOL;
+            $responses .= 'Harga Tertinggi'. ' Rp.' . number_format($this->tickers[$this->coin]['high'], 0, ',', '.') . PHP_EOL;
+            $responses .= 'Harga Terendah'. ' Rp.' . number_format($this->tickers[$this->coin]['low'], 0, ',', '.') . PHP_EOL;
          }
+         return $responses;
      }
 }
