@@ -11,6 +11,7 @@ use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 require_once "vendor/autoload.php";
 require_once "constants/coins.php";
 require_once "constants/markets.php";
+require_once "core/CoinIDR.php";
 require_once "core/Markets.php";
 
 $configs = [
@@ -41,8 +42,14 @@ $botman->hears("/btc_markets", function (BotMan $bot) {
 });
 
 $botman->hears("/btc_idr", function (BotMan $bot){
-    
-})
+    global $coin_idr_markets;
+    $coinIDR = new CoinIDR($coin_idr_markets[0]);
+    $bot->reply($coinIDR->getResponses());
+});;
+
+$botman->hears("kuliah saya {kampus}", function (BotMan $bot, $kampus) {
+    $bot->reply("Oh kuliah di $kampus, saya temennya bot anjaymabar");
+});
 
 // Message parameter
 $botman->hears("nama saya {nama}", function (BotMan $bot, $nama) {
