@@ -37,7 +37,12 @@ class CoinIDR
             $responses .= 'Harga Terakhir'. ' Rp.' . number_format($this->tickers[$this->coin]['last'], 0, ',', '.') . PHP_EOL;
             $responses .= 'Harga Tertinggi'. ' Rp.' . number_format($this->tickers[$this->coin]['high'], 0, ',', '.') . PHP_EOL;
             $responses .= 'Harga Terendah'. ' Rp.' . number_format($this->tickers[$this->coin]['low'], 0, ',', '.') . PHP_EOL;
+
+            return $responses;
+         } else {
+             $responses = "Saya tidak mengenali maksud anda";
+             return $responses;
          }
-         return $responses;
+         
      }
 }
