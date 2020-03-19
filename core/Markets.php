@@ -50,7 +50,7 @@ class Markets
         if ($this->market == $IDR_MARKETS) {
             $responses .= "IDR Markets\n";
             foreach ($this->tickers as $key => $value) {
-                $responses .= strtoupper(explode('_', $key)[0]) . ' Rp.' . number_format($value['last'], 0, ',', '.') . PHP_EOL;
+                $responses .= strtoupper(explode('_', $key)[0]) . ' Rp.' . number_format($value['last'], 0, ',', '.') . " /$key" . PHP_EOL;
             }
         } else {
             $responses .= "BTC Markets\n";
