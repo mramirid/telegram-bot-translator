@@ -10,6 +10,10 @@ BOT Telegram untuk mengakses API Indodax, bot: [@indodax_api_bot](https://t.me/i
 
 **NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'TOKEN.txt'
 
+## Instalasi
+1. Install Composer
+2. Install botman dan driver api telegram via composer
+
 ## Langkah-langkah menjalankan untuk testing, via bash/git bash
 Link video turtorial bisa ditemukan [disini](https://www.youtube.com/watch?v=pTGRpH2dvRM)
 1. php -S localhost:[PORT]
