@@ -2,8 +2,6 @@
 
 use BotMan\BotMan\Interfaces\UserInterface;
 
-require_once "database/config.php";
-
 /**
  * Fungsi ini menginsert user baru (ketika pertama kali chat)
  * Jika user sudah terdaftar, maka abaikan
@@ -25,7 +23,7 @@ function insertUserIfNecessary(UserInterface $user)
         return;
     }
 
-    if ($username != $resultRow->username || $nickname != $resultRow->nickname) {
+    if ($username != $resultRow[1] || $nickname != $resultRow[2]) {
         $queryUpdate = "UPDATE users 
                         SET username = '$username', nickname = '$nickname'
                         WHERE id = $id";
