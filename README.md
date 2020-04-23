@@ -6,13 +6,13 @@
 
 ## Deskripsi
 
-BOT Telegram untuk mengakses API Indodax, bot: [@indodax_api_bot](https://t.me/indodax_api_bot)
+BOT Telegram untuk mencatat penggunaan pesan oleh suatu user, bot: [@api_2020_bot](https://t.me/api_2020_bot)
 
-**NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'TOKEN.txt'
+**NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'TOKEN.txt' di folder private (private/TOKEN.txt)
 
 ## Instalasi
 1. Install Composer
-2. Install botman dan driver api telegram via composer
+2. Melalui command line di root folder project jalankan perintah<br>```$ composer install```
 
 ## Langkah-langkah menjalankan untuk testing, via bash/git bash
 Link video turtorial bisa ditemukan [disini](https://www.youtube.com/watch?v=pTGRpH2dvRM)
