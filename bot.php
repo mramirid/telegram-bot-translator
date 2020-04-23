@@ -9,7 +9,9 @@ use BotMan\BotMan\Messages\Attachments\Video;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 require_once "vendor/autoload.php";
+require_once "database/config.php";
 require_once "models/user_model.php";
+require_once "models/message_model.php";
 
 $configs = [
     "telegram" => [
@@ -28,14 +30,14 @@ $botman->hears("/start", function (BotMan $bot) {
 });
 
 $botman->hears("/help", function (BotMan $bot) {
-    $user = $bot->getUser();
-    insertUserIfNecessary($user);
+    insertUserIfNecessary($bot->getUser());
     $message = "/say hai - Menyapa bot" . PHP_EOL . "/say kenalan - Info mengenai bot";
     $bot->reply($message);
 });
 
 $botman->hears("/say {message}", function (BotMan $bot, $message) {
-    $bot->reply("Anda mengirim $message");
+    insertUserIfNecessary($bot->getUser());
+    $bot->reply(getResponse($message));
 });
 
 // Fallback (balasan invalid command)
