@@ -9,11 +9,7 @@ use BotMan\BotMan\Messages\Attachments\Video;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 require_once "vendor/autoload.php";
-require_once "constants/coins.php";
-require_once "constants/markets.php";
-require_once "core/CoinIDR.php";
-require_once "core/CoinBTC.php";
-require_once "core/Markets.php";
+require_once "models/user_model.php";
 
 $configs = [
     "telegram" => [
@@ -25,53 +21,27 @@ DriverManager::loadDriver(TelegramDriver::class);
 
 $botman = BotManFactory::create($configs);
 
-// Command
 $botman->hears("/start", function (BotMan $bot) {
-    $bot->reply("Willkommen 😊");
+    $user = $bot->getUser();
+    insertUserIfNecessary($user);   // Daftarkan user
+    $bot->reply("Willkommen " . $user->getFirstName() . " 😊 (id: " . $user->getId() . ")");
 });
 
-$botman->hears("/idr_markets", function (BotMan $bot) {
-    global $IDR_MARKETS;
-    $idrMarkets = new Markets($IDR_MARKETS);
-    $bot->reply($idrMarkets->getResponses());
+$botman->hears("/help", function (BotMan $bot) {
+    $user = $bot->getUser();
+    insertUserIfNecessary($user);
+    $message = "/say hai - Menyapa bot" . PHP_EOL . "/say kenalan - Info mengenai bot";
+    $bot->reply($message);
 });
 
-$botman->hears("/btc_markets", function (BotMan $bot) {
-    global $BTC_MARKETS;
-    $btcMarkets = new Markets($BTC_MARKETS);
-    $bot->reply($btcMarkets->getResponses());
-});
-
-$botman->hears("{coin}", function (BotMan $bot, $coin){
-    global $coin_idr_markets;
-    global $coin_btc_markets;
-    $many = strlen($coin);
-    $temp = substr($coin, 1, $many);
-
-    if(in_array($temp, $coin_idr_markets)) {
-        $coinIDR = new CoinIDR($temp);
-        $bot->reply($coinIDR->getResponses());
-    } else if(in_array($temp, $coin_btc_markets)) {
-        $coinBTC = new CoinBTC($temp);
-        $bot->reply($coinBTC->getResponses());
-    } else if ($coin === "/btc_markets"){
-
-    } else if ($coin === "/idr_markets"){
-
-    } else if ($coin === "/start"){
-
-    } else {
-        $bot->reply("Saya tidak kenal maksud anda");
-    }
-});;
-
-// Message parameter
-$botman->hears("nama saya {nama}", function (BotMan $bot, $nama) {
-    $bot->reply("Salam kenal $nama, saya temennya bot anjaymabar");
+$botman->hears("/say {message}", function (BotMan $bot, $message) {
+    $bot->reply("Anda mengirim $message");
 });
 
 // Fallback (balasan invalid command)
 $botman->fallback(function (BotMan $bot) {
+    $user = $bot->getUser();
+    insertUserIfNecessary($user);
     $message = $bot->getMessage()->getText();
     $bot->reply("Invalid command for '$message'");
 });
