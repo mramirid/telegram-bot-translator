@@ -23,6 +23,7 @@ function insertUserIfNecessary(UserInterface $user)
         return;
     }
 
+    // Update, kolom 1: username, kolom 2: nickname
     if ($username != $resultRow[1] || $nickname != $resultRow[2]) {
         $queryUpdate = "UPDATE users 
                         SET username = '$username', nickname = '$nickname'

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Fungsi ini mengambil response dari 
+ * database berdasarkan pesan dari pengguna
+ */
 function getResponse($message)
 {
     global $mysqli; 
