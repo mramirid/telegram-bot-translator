@@ -37,38 +37,14 @@ $botman->hears("/help", function (BotMan $bot) {
 
 $botman->hears("/say {message}", function (BotMan $bot, $message) {
     insertUserIfNecessary($bot->getUser());
-    $bot->reply(getResponse($message));
+    $bot->reply(getResponse($bot->getUser(), $message));
 });
 
 // Fallback (balasan invalid command)
 $botman->fallback(function (BotMan $bot) {
-    $user = $bot->getUser();
-    insertUserIfNecessary($user);
+    insertUserIfNecessary($bot->getUser());
     $message = $bot->getMessage()->getText();
     $bot->reply("Invalid command for '$message'");
-});
-
-// Regex, input salah = masuk fallback
-$botman->hears("request nilai ([0-9]+) di matkul (API|RPL)", function (BotMan $bot, $qty, $item) {
-    $bot->reply("Yomann, ntar matkul $item mu dapet $qty");
-});
-
-// Send image
-$botman->hears("/berangkat_ke_upn", function (BotMan $bot) {
-    $attachment = new Image("https://s.kaskus.id/r540x540/images/2014/03/23/6590730_20140323042249.png");
-
-    $message = OutgoingMessage::create("Nenek moyang menggunakannya bermil-mil jauhnya")->withAttachment($attachment);
-
-    $bot->reply($message);
-});
-
-// Send video
-$botman->hears("kirim video", function (BotMan $bot) {
-    $attachment = new Video("https://www.w3schools.com/html/mov_bbb.mp4");
-
-    $message = OutgoingMessage::create("Sample video")->withAttachment($attachment);
-
-    $bot->reply($message);
 });
 
 $botman->listen();
