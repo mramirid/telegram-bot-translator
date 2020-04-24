@@ -2,8 +2,6 @@
 
 use BotMan\BotMan\Interfaces\UserInterface;
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 /**
  * Fungsi ini mengambil response dari database berdasarkan pesan dari pengguna
  * Fungsi ini juga mencatat berapa kali suatu pengguna menggunakan suatu pesan
