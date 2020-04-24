@@ -10,6 +10,8 @@ BOT Telegram untuk mencatat penggunaan pesan oleh suatu user, bot: [@api_2020_bo
 
 **NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'TOKEN.txt' di folder private (private/TOKEN.txt)
 
+**NOTE:** File database ada di assets/demo_bot.sql
+
 ## Instalasi
 1. Install Composer
 2. Melalui command line di root folder project jalankan perintah<br>```$ composer install```
