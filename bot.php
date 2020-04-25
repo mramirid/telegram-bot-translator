@@ -58,6 +58,16 @@ $botman->hears("/say@api_2020_bot {message}", function (BotMan $bot, $message) {
     $bot->reply(getResponse($bot->getUser(), $message));
 });
 
+$botman->hears("/hola", function (BotMan $bot) {
+    insertUserIfNecessary($bot->getUser());
+    $bot->reply("/cek_data@BitValueBot");
+});
+
+$botman->hears("/hola@api_2020_bot", function (BotMan $bot) {
+    insertUserIfNecessary($bot->getUser());
+    $bot->reply("/cek_data@BitValueBot");
+});
+
 // Fallback (balasan invalid command)
 $botman->fallback(function (BotMan $bot) {
     insertUserIfNecessary($bot->getUser());
