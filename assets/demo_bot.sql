@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 24 Apr 2020 pada 00.30
--- Versi server: 5.7.24
--- Versi PHP: 7.2.19
+-- Host: localhost:3306
+-- Generation Time: May 01, 2020 at 04:32 PM
+-- Server version: 5.7.30-log
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `demo_bot`
+-- Database: `amirrpw_demo_bot`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `count_messages`
+-- Table structure for table `count_messages`
 --
 
 CREATE TABLE `count_messages` (
@@ -37,18 +38,18 @@ CREATE TABLE `count_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `count_messages`
+-- Dumping data for table `count_messages`
 --
 
 INSERT INTO `count_messages` (`id`, `id_user`, `id_message`, `count_usage`, `created_at`, `updated_at`) VALUES
-(1, 482942544, 1, 3, '2020-04-23 16:06:47', '2020-04-23 16:23:33'),
-(2, 482942544, 2, 1, '2020-04-23 16:08:15', '2020-04-23 16:08:15'),
+(1, 482942544, 1, 7, '2020-04-23 16:06:47', '2020-04-29 14:46:50'),
+(2, 482942544, 2, 2, '2020-04-23 16:08:15', '2020-04-24 22:31:39'),
 (3, 753050347, 1, 2, '2020-04-23 16:23:48', '2020-04-23 16:23:59');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `messages`
+-- Table structure for table `messages`
 --
 
 CREATE TABLE `messages` (
@@ -58,7 +59,7 @@ CREATE TABLE `messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `messages`
+-- Dumping data for table `messages`
 --
 
 INSERT INTO `messages` (`id`, `message`, `response`) VALUES
@@ -68,7 +69,7 @@ INSERT INTO `messages` (`id`, `message`, `response`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -78,11 +79,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `nickname`) VALUES
-(482942544, 'mramirid', 'Amir M'),
+(482942544, 'mramirid', 'Amir'),
 (753050347, 'sunuilhmp', 'Sunu'),
 (788192855, 'kholil_rnm', 'Kholilul');
 
@@ -91,35 +92,35 @@ INSERT INTO `users` (`id`, `username`, `nickname`) VALUES
 --
 
 --
--- Indeks untuk tabel `count_messages`
+-- Indexes for table `count_messages`
 --
 ALTER TABLE `count_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `messages`
+-- Indexes for table `messages`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `count_messages`
+-- AUTO_INCREMENT for table `count_messages`
 --
 ALTER TABLE `count_messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `messages`
+-- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
