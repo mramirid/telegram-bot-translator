@@ -5,14 +5,12 @@ use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\Drivers\Telegram\TelegramDriver;
 
-require_once "vendor/autoload.php";
-require_once "database/config.php";
-require_once "models/user_model.php";
-require_once "models/message_model.php";
+require_once 'vendor/autoload.php';
+require_once 'translate/translate.php';
 
 $configs = [
-    "telegram" => [
-        "token" => file_get_contents("private/TOKEN.txt")
+    'telegram' => [
+        'token' => file_get_contents('private/telegram/TOKEN.txt')
     ]
 ];
 
@@ -20,50 +18,69 @@ DriverManager::loadDriver(TelegramDriver::class);
 
 $botman = BotManFactory::create($configs);
 
-$botman->hears("/start", function (BotMan $bot) {
+$botman->hears('/start', function (BotMan $bot) {
     $user = $bot->getUser();
-    insertUserIfNecessary($user);   // Daftarkan user
-    $bot->reply("Willkommen " . $user->getFirstName() . " 😊 (id: " . $user->getId() . ")");
+    $bot->reply('Hello ' . $user->getFirstName() . ' 😊');
+    $bot->reply('Perkenalkan, saya bot translator bahasa inggris ke bahasa jerman');
+    $bot->reply('Silahkan cek /help untuk melihat perintah');
 });
 
-$botman->hears("/start@api_2020_bot", function (BotMan $bot) {
-    $user = $bot->getUser();
-    insertUserIfNecessary($user);   // Daftarkan user
-    $bot->reply("Willkommen " . $user->getFirstName() . " 😊 (id: " . $user->getId() . ")");
-});
-
-$botman->hears("/help", function (BotMan $bot) {
-    insertUserIfNecessary($bot->getUser());
-    $message  = "/say@api_2020_bot hai - Menyapa bot" . PHP_EOL . PHP_EOL;
-    $message .= "/say@api_2020_bot kenalan - Info mengenai bot" . PHP_EOL . PHP_EOL;
-    $message .= "Tekan perintah selama 1-3 detik untuk memilih perintah";
+$botman->hears('/help', function (BotMan $bot) {
+    $message  = '/start - greeting' . PHP_EOL . PHP_EOL;
+    $message .= '/translate {text} - Mulai percakapan translasi' . PHP_EOL . PHP_EOL;
+    $message .= 'Tap & tahan perintah selama 2 detik untuk menulis perintah secara instan';
     $bot->reply($message);
 });
 
-$botman->hears("/help@api_2020_bot", function (BotMan $bot) {
-    insertUserIfNecessary($bot->getUser());
-    $message  = "/say@api_2020_bot hai - Menyapa bot" . PHP_EOL . PHP_EOL;
-    $message .= "/say@api_2020_bot kenalan - Info mengenai bot" . PHP_EOL . PHP_EOL;
-    $message .= "Tekan perintah selama 1-3 detik untuk memilih perintah";
+$botman->hears('/translate {text}', function (BotMan $bot, $text) {
+    $message  = 'Teks:' . PHP_EOL . $text . PHP_EOL . PHP_EOL;
+    $message .= 'Translasi:' . PHP_EOL . startTranslation($text);
     $bot->reply($message);
 });
 
-$botman->hears("/say {message}", function (BotMan $bot, $message) {
-    insertUserIfNecessary($bot->getUser());
-    $bot->reply(getResponse($bot->getUser(), $message));
-});
-
-$botman->hears("/say@api_2020_bot {message}", function (BotMan $bot, $message) {
-    insertUserIfNecessary($bot->getUser());
-    $bot->reply(getResponse($bot->getUser(), $message));
-});
-
-// Fallback (balasan invalid command)
 $botman->fallback(function (BotMan $bot) {
-    insertUserIfNecessary($bot->getUser());
-    $message  = "Invalid command for " . $bot->getMessage()->getText() . PHP_EOL . PHP_EOL;
-    $message .= "Mungkin anda kurang input argumen perintah? Cek /help atau /help@api_2020_bot";
+    if ($bot->getMessage()->getText() == '/translate') {
+        $message  = 'Harap ulangi, yang benar adalah:' . PHP_EOL . $bot->getMessage()->getText() . ' {text}';
+    } else {
+        $message  = 'Perintah ' . $bot->getMessage()->getText() . ' tidak dikenali' . PHP_EOL;
+        $message .= 'Cek /help untuk melihat list perintah';
+    }
     $bot->reply($message);
+});
+
+/**
+ * Grup tujuan
+ */
+$botman->group(['recipient' => '-1001307666764'], function (Botman $innerBotman) {
+    $innerBotman->hears('/start@api_2020_bot', function (BotMan $bot) {
+        $user = $bot->getUser();
+        $bot->reply('Hello ' . $user->getFirstName() . ' 😊');
+        $bot->reply('Perkenalkan, saya bot translator bahasa inggris ke bahasa jerman');
+        $bot->reply('Silahkan cek /help@api_2020_bot untuk melihat perintah');
+    });
+    
+    $innerBotman->hears('/help@api_2020_bot', function (BotMan $bot) {
+        $message  = '/start@api_2020_bot - greeting' . PHP_EOL . PHP_EOL;
+        $message .= '/translate@api_2020_bot {text} - Mulai percakapan translasi' . PHP_EOL . PHP_EOL;
+        $message .= 'Tap & tahan perintah selama 2 detik untuk menulis perintah secara instan';
+        $bot->reply($message);
+    });
+    
+    $innerBotman->hears('/translate@api_2020_bot {text}', function (BotMan $bot, $text) {
+        $message  = 'Teks:' . PHP_EOL . $text . PHP_EOL . PHP_EOL;
+        $message .= 'Translasi:' . PHP_EOL . startTranslation($text);
+        $bot->reply($message);
+    });
+    
+    $innerBotman->fallback(function (BotMan $bot) {
+        if ($bot->getMessage()->getText() == '/translate@api_2020_bot') {
+            $message  = 'Harap ulangi, yang benar adalah:' . PHP_EOL . $bot->getMessage()->getText() . ' {text}';
+        } else {
+            $message  = 'Perintah ' . $bot->getMessage()->getText() . ' tidak dikenali' . PHP_EOL;
+            $message .= 'Cek /help@api_2020_bot untuk melihat list perintah';
+        }
+        $bot->reply($message);
+    });
 });
 
 $botman->listen();
