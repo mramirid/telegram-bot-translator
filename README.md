@@ -6,7 +6,7 @@
 
 ## Deskripsi
 
-BOT Telegram untuk melakukan translasi dari bahasa Inggris ke bahasa Jerman dengan menggunakan IBM Watson
+BOT Telegram untuk melakukan translasi dari bahasa Inggris ke bahasa Jerman dengan menggunakan IBM Watson. Cek [video penjelasan](https://youtu.be/W5m4QepAHNY)
 
 **NOTE:** Anda perlu memasukan token BOT TELEGRAM anda pada file 'private/telegram/TOKEN.txt'
 
